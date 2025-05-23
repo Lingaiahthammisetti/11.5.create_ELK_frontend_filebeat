@@ -54,5 +54,3 @@ VALIDATE $? "start filebeat"
 
 systemctl status filebeat &>>$LOGFILE
 VALIDATE $? "filebeat status"
-
-
