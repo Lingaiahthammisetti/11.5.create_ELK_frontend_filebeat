@@ -47,7 +47,7 @@ sudo sed -i 's|    - /var/log/*.log|  - /var/log/nginx/access.log|' /etc/filebea
 VALIDATE $? "replaced /var/log/nginx/access.log"
 
 sudo sed -i 's|  hosts: \["localhost:9200"\]|  hosts: ["http://192.168.1.100:9200"]|' /etc/filebeat/filebeat.yml &>> $LOGFILE
-VALIDATE $? " Elastic search ip address change "
+VALIDATE $? "Elastic search ip address change "
 
 systemctl start filebeat &>>$LOGFILE
 VALIDATE $? "start filebeat"
