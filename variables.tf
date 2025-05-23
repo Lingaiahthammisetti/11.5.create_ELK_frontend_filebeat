@@ -1,4 +1,3 @@
-
 variable "ec2_instance" {
    default = {
         instance_type  = "t3.micro"
