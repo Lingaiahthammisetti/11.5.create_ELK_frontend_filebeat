@@ -15,7 +15,7 @@ resource "aws_instance" "ec2_instance" {
 }
 resource "aws_route53_record" "elk_r53" {
     zone_id = var.zone_id
-    name    = "frontend.${var.domain_name}"
+    name    = "elk.${var.domain_name}"
     type    = "A"
     ttl     = 1
     records = [aws_instance.ec2_instance.public_ip]
