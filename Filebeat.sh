@@ -41,13 +41,13 @@ yum install filebeat -y &>>$LOGFILE
 VALIDATE $? "filebeat Installation"
 
 sudo sed -i 's/  enabled: false/  enabled: true/' /etc/filebeat/filebeat.yml &>> $LOGFILE
-VALIDATE $? "replaced   enabled: true"
+VALIDATE $? "Enabled filebeat module"
 
-sudo sed -i 's|    - /var/log/*.log|  - /var/log/nginx/access.log|' /etc/filebeat/filebeat.yml  &>> $LOGFILE
+sudo sed -i 's|^[[:space:]]*- /var/log/\*\.log|  - /var/log/nginx/access.log|' /etc/filebeat/filebeat.yml &>> $LOGFILE
 VALIDATE $? "replaced /var/log/nginx/access.log"
 
-sudo sed -i 's|  hosts: \["localhost:9200"\]|  hosts: ["http://192.168.1.100:9200"]|' /etc/filebeat/filebeat.yml &>> $LOGFILE
-VALIDATE $? "Elastic search ip address change "
+sudo sed -i 's|^[[:space:]]*hosts: \["localhost:9200"\]|  hosts: ["http://elastic-search.lingaiah.online:9200"]|' /etc/filebeat/filebeat.yml &>> $LOGFILE
+VALIDATE $? "Replaced latest Elasticsearch IP address"
 
 systemctl start filebeat &>>$LOGFILE
 VALIDATE $? "start filebeat"
