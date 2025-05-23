@@ -53,8 +53,10 @@ VALIDATE $? "Removing existing Content"
 unzip /tmp/frontend.zip &>>$LOGFILE
 VALIDATE $? "Extracked frontend code"
 
-#cp /root/11.5.create_ELK_frontend_filebeat/expense.conf /etc/nginx/default.d/expense.conf &>>$LOGFILE
-cp /home/ec2-user/11.5.create_ELK_frontend_filebeat/expense.conf /etc/nginx/default.d/expense.conf &>>$LOGFILE
+#cp /home/ec2-user/expense-shell/expense.conf /etc/nginx/default.d/expense.conf &>>$LOGFILE
+#cp /root/3.4.expense-shell/expense.conf /etc/nginx/default.d/expense.conf &>>$LOGFILE
+
+cp /home/ec2-user/11.5.create_ELK_frontend_filebeat/expense/expense.conf /etc/nginx/default.d/expense.conf &>>$LOGFILE
 VALIDATE $? "Copied expense conf"
 
 systemctl restart nginx &>>$LOGFILE
