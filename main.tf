@@ -18,6 +18,6 @@ resource "aws_route53_record" "elk_r53" {
     name    = "frontend.${var.domain_name}"
     type    = "A"
     ttl     = 1
-    records = [aws_instance.elk_ec2.public_ip]
+    records = [aws_instance.ec2_instance.public_ip]
     allow_overwrite = true
 }
