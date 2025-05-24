@@ -49,8 +49,8 @@ VALIDATE $? "replaced /var/log/nginx/access.log"
 sudo sed -i 's|^[[:space:]]*hosts: \["localhost:9200"\]|  hosts: ["http://elastic-search.lingaiah.online:9200"]|' /etc/filebeat/filebeat.yml &>> $LOGFILE
 VALIDATE $? "Replaced latest Elasticsearch IP address"
 
-systemctl start filebeat &>>$LOGFILE
-VALIDATE $? "start filebeat"
+systemctl restart filebeat &>>$LOGFILE
+VALIDATE $? "restart filebeat"
 
 systemctl status filebeat &>>$LOGFILE
 VALIDATE $? "filebeat status"
