@@ -52,5 +52,6 @@ VALIDATE $? "Replaced latest Elasticsearch IP address"
 systemctl restart filebeat &>>$LOGFILE
 VALIDATE $? "restart filebeat"
 
+
 systemctl status filebeat &>>$LOGFILE
 VALIDATE $? "filebeat status"
