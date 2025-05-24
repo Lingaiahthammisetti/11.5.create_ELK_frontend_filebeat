@@ -54,3 +54,6 @@ VALIDATE $? "restart filebeat"
 
 systemctl status filebeat &>>$LOGFILE
 VALIDATE $? "filebeat status"
+
+sudo sed -i ':a;N;$!ba;s/\$remote_addr - \$remote_user \[\$time_local\] "\$request"[[:space:]]*'\''\$status \$body_bytes_sent "\$http_referer"[[:space:]]*'\''"\$http_user_agent" "\$http_x_forwarded_for"/\$remote_addr [\$time_local] \$request \$status \$body_bytes_sent "\$http_referer" \$request_time/' /etc/nginx/nginx.conf
+VALIDATE $? "Replaced Grok pattern format in Nginx Frontend Server"
