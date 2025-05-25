@@ -47,7 +47,7 @@ VALIDATE $? "Enabled filebeat module"
 # VALIDATE $? "replaced /var/log/nginx/access.log"
 
 
-sed -i 's|^[[:space:]]*- /var/log/\*\.log|  - /var/log/nginx/access.log|' /etc/filebeat/filebeat.yml
+sed -i 's|^[[:space:]]*- /var/log/\*\.log|[[:space:]]* - /var/log/nginx/access.log|' /etc/filebeat/filebeat.yml
 VALIDATE $? "replaced /var/log/nginx/access.log"
 
 
