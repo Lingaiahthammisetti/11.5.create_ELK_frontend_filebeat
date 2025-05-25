@@ -60,7 +60,7 @@ sed -i 's/^#output\.logstash:/output.logstash:/' /etc/filebeat/filebeat.yml &>> 
 VALIDATE $? "replace output.logstash"
 
 # Uncomment the hosts line and replace localhost with the new hostname
-sed -i 's/^[[:space:]]*#hosts: \["localhost:5044"\]/hosts: ["elastic-search.lingaiah.online:5044"]/' /etc/filebeat/filebeat.yml &>> $LOGFILE
+sed -i 's/^[[:space:]]*#hosts: \["localhost:5044"\]/  hosts: ["elastic-search.lingaiah.online:5044"]/' /etc/filebeat/filebeat.yml &>> $LOGFILE
 VALIDATE $? "replaced elastic-search.lingaiah.online:5044"
 
 systemctl restart filebeat &>>$LOGFILE
