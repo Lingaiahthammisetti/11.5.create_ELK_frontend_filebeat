@@ -43,8 +43,13 @@ VALIDATE $? "filebeat Installation"
 sudo sed -i 's/  enabled: false/  enabled: true/' /etc/filebeat/filebeat.yml &>>$LOGFILE
 VALIDATE $? "Enabled filebeat module"
 
-sudo sed -i 's|^[[:space:]]*- /var/log/\*\.log|  - /var/log/nginx/access.log|' /etc/filebeat/filebeat.yml &>>$LOGFILE
+# sudo sed -i 's|^[[:space:]]*- /var/log/\*\.log|  - /var/log/nginx/access.log|' /etc/filebeat/filebeat.yml &>>$LOGFILE
+# VALIDATE $? "replaced /var/log/nginx/access.log"
+
+
+sed -i 's|^[[:space:]]*- /var/log/\*\.log|  - /var/log/nginx/access.log|' /etc/filebeat/filebeat.yml
 VALIDATE $? "replaced /var/log/nginx/access.log"
+
 
 sed -i '/^\s*output.elasticsearch:/s/^/# /' /etc/filebeat/filebeat.yml &>>$LOGFILE
 VALIDATE $? "comment output.elasticsearch"
