@@ -40,32 +40,24 @@ VALIDATE $? "adding repo for elasticsearch"
 yum install filebeat -y &>>$LOGFILE
 VALIDATE $? "filebeat Installation"
 
-sudo sed -i 's/  enabled: false/  enabled: true/' /etc/filebeat/filebeat.yml &>> $LOGFILE
+sudo sed -i 's/  enabled: false/  enabled: true/' /etc/filebeat/filebeat.yml &>>$LOGFILE
 VALIDATE $? "Enabled filebeat module"
 
-sudo sed -i 's|^[[:space:]]*- /var/log/\*\.log|  - /var/log/nginx/access.log|' /etc/filebeat/filebeat.yml &>> $LOGFILE
+sudo sed -i 's|^[[:space:]]*- /var/log/\*\.log|  - /var/log/nginx/access.log|' /etc/filebeat/filebeat.yml &>>$LOGFILE
 VALIDATE $? "replaced /var/log/nginx/access.log"
 
-sudo sed -i 's|^[[:space:]]*hosts: \["localhost:9200"\]|  hosts: ["http://elastic-search.lingaiah.online:9200"]|' /etc/filebeat/filebeat.yml &>> $LOGFILE
-VALIDATE $? "Replaced latest Elasticsearch IP address"
-
-sed -i '/^\s*output.elasticsearch:/s/^/# /' /etc/filebeat/filebeat.yml &>> $LOGFILE
+sed -i '/^\s*output.elasticsearch:/s/^/# /' /etc/filebeat/filebeat.yml &>>$LOGFILE
 VALIDATE $? "comment output.elasticsearch"
 
-sed -i '/^\s*hosts: \["http:\/\/elastic-search.lingaiah.online:9200"\]/s/^/# /' /etc/filebeat/filebeat.yml &>> $LOGFILE
-VALIDATE $? "comment elastic-search.lingaiah.online:9200"
+sed -i '/^[[:space:]]*hosts: \["localhost:9200"\]/s/^/# /' /etc/filebeat/filebeat.yml &>>$LOGFILE
+VALIDATE $? "comment   hosts: ["localhost:9200"]"
 
 # Uncomment the output.logstash line
-sed -i 's/^#output\.logstash:/output.logstash:/' /etc/filebeat/filebeat.yml &>> $LOGFILE
+sed -i 's/^#output\.logstash:/output.logstash:/' /etc/filebeat/filebeat.yml &>>$LOGFILE
 VALIDATE $? "replace output.logstash"
 
-# Uncomment the hosts line and replace localhost with the new hostname
-# sed -i 's|^[[:space:]]*#hosts: \["localhost:5044"\]|  hosts: ["elastic-search.lingaiah.online:5044"]|' /etc/filebeat/filebeat.yml &>> $LOGFILE
-# VALIDATE $? "replaced elastic-search.lingaiah.online:5044"
-
-
-
-sudo sed -i 's|^[[:space:]]*#hosts: \["localhost:5044"\]|  hosts: ["elastic-search.lingaiah.online:5044"]|' /etc/filebeat/filebeat.yml &>> $LOGFILE
+#uncomment and update latest
+sudo sed -i 's/^[[:space:]]*#\?hosts: *\["localhost:5044"\]/  hosts: ["elastic-search.lingaiah.online:5044"]/' /etc/filebeat/filebeat.yml &>>$LOGFILE
 VALIDATE $? "replaced elastic-search.lingaiah.online:5044"
 
 systemctl restart filebeat &>>$LOGFILE
@@ -73,13 +65,6 @@ VALIDATE $? "start filebeat"
 
 systemctl status filebeat &>>$LOGFILE
 VALIDATE $? "filebeat status"
-
-
-
-
-
-
-
 
 
 
@@ -141,7 +126,6 @@ VALIDATE $? "filebeat status"
 
 # systemctl restart filebeat &>>$LOGFILE
 # VALIDATE $? "restart filebeat"
-
 
 # systemctl status filebeat &>>$LOGFILE
 # VALIDATE $? "filebeat status"
