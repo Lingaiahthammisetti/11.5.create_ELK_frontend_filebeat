@@ -27,14 +27,16 @@ else
     echo "You are super user."
 fi
 
-echo "[elasticsearch]
+echo "
+[elasticsearch]
 name=Elasticsearch repository for 7.x packages
 baseurl=https://artifacts.elastic.co/packages/7.x/yum
 gpgcheck=1
 gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
 enabled=1
 autorefresh=1
-type=rpm-md  " >/etc/yum.repos.d/elasticsearch.repo
+type=rpm-md
+" > /etc/yum.repos.d/elasticsearch.repo
 VALIDATE $? "adding repo for elasticsearch"
 
 yum install filebeat -y &>>$LOGFILE
